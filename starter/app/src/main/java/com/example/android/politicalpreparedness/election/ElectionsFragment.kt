@@ -23,6 +23,7 @@ class ElectionsFragment: Fragment() {
         //TODO: Initiate recycler adapters
 
         //TODO: Populate recycler adapters
+        return null
 
     }
 
