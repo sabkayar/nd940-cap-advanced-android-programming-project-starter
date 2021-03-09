@@ -34,6 +34,7 @@ class ElectionsViewModel(val dataSource: ElectionDao) : ViewModel() {
             withContext(Dispatchers.IO){
                 try {
                         val result = CivicsApi.retrofitService.getElections()
+
                     Timber.d(result.toString())
 
 
