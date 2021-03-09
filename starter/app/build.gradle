@@ -17,7 +17,14 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
     buildTypes {
+        debug{
+            def localPropertiesFile = rootProject.file("local.properties")
+            def localProperties = new Properties()
+            localProperties.load(new FileInputStream(localPropertiesFile))
+            buildConfigField("String", "API_KEY", "\"" + localProperties['apiKey'] + "\"")
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -33,6 +40,12 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+}
+
+def getApiKey() {
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    return properties.getProperty("api_key_debug");
 }
 
 dependencies {
@@ -73,7 +86,14 @@ dependencies {
     //Room
     implementation "androidx.room:room-runtime:$version_room"
     kapt "androidx.room:room-compiler:$version_room"
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:$version_room"
 
     // Location
     implementation "com.google.android.gms:play-services-location:$version_play_services_location"
+
+    //Timber library for logging
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 }
+
+

@@ -1,7 +1,9 @@
 package com.example.android.politicalpreparedness.network.models
 
 import android.os.Parcelable
+import com.squareup.moshi.JsonClass
 import kotlinx.android.parcel.Parcelize
+
 
 @Parcelize
 data class Division(
