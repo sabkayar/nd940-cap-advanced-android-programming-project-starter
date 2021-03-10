@@ -13,9 +13,10 @@ fun TextView.setDate(date: Date?) {
 
 @BindingAdapter("android:setVisibility")
 fun View.setVisibility(value: String?) {
-    if (value.isNullOrEmpty() || value.isNullOrBlank()) {
-        visibility = View.GONE
+    visibility = if (value.isNullOrEmpty() || value.isNullOrBlank()) {
+        View.GONE
     } else {
-        visibility = View.VISIBLE
+        View.VISIBLE
     }
 }
+

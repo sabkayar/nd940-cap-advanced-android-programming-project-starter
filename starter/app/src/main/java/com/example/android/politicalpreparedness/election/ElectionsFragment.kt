@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -16,8 +15,6 @@ import com.example.android.politicalpreparedness.databinding.FragmentElectionBin
 import com.example.android.politicalpreparedness.election.adapter.ElectionClickListener
 import com.example.android.politicalpreparedness.election.adapter.ElectionListAdapter
 import com.example.android.politicalpreparedness.showSnackBar
-import timber.log.Timber
-import com.example.android.politicalpreparedness.showToast
 
 class ElectionsFragment : Fragment() {
 
@@ -41,7 +38,7 @@ class ElectionsFragment : Fragment() {
         binding.electionViewModel = viewModel
         binding.lifecycleOwner = this
 
-        viewModel.populateElectionsFromNetwork()
+        viewModel.populateElections()
 
         //TODO: Link elections to voter info
 
@@ -51,12 +48,26 @@ class ElectionsFragment : Fragment() {
 
         //TODO: DONE Refresh adapters when fragment loads
 
-        val adapter = ElectionListAdapter(ElectionClickListener {
+        val electionListAdapter = ElectionListAdapter(ElectionClickListener {
             viewModel.onElectionItemClicked(it)
         })
-        binding.upcomingElectionRecyclerView.adapter = adapter
+
+        val savedElectionListAdapter = ElectionListAdapter(ElectionClickListener {
+            viewModel.onElectionItemClicked(it)
+        })
+        binding.upcomingElectionRecyclerView.adapter = electionListAdapter
+        binding.savedElectionsRecyclerView.adapter = savedElectionListAdapter
+
         viewModel.upcomingElections.observe(viewLifecycleOwner, Observer {
-            adapter.submitList(it)
+            electionListAdapter.submitList(it)
+        })
+
+        viewModel.savedElections.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                savedElectionListAdapter.submitList(it)
+            }else{
+                savedElectionListAdapter.submitList(mutableListOf())
+            }
         })
 
         viewModel.navigateToVoterInfo.observe(viewLifecycleOwner, Observer {
@@ -66,8 +77,8 @@ class ElectionsFragment : Fragment() {
             }
         })
 
-        viewModel.showToast.observe(viewLifecycleOwner, Observer {
-            requireActivity().showSnackBar(it,binding.root)
+        viewModel.showPrompt.observe(viewLifecycleOwner, Observer {
+            requireActivity().showSnackBar(it, binding.root)
         })
         return binding.root
 

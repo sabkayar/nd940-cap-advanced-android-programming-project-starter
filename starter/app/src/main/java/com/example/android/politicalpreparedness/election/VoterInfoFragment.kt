@@ -1,22 +1,17 @@
 package com.example.android.politicalpreparedness.election
 
-import android.annotation.SuppressLint
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
+import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.database.ElectionDatabase
 import com.example.android.politicalpreparedness.databinding.FragmentVoterInfoBinding
 import com.example.android.politicalpreparedness.showSnackBar
-import com.example.android.politicalpreparedness.showToast
-import kotlinx.coroutines.launch
 
 class VoterInfoFragment : Fragment() {
 
@@ -42,15 +37,15 @@ class VoterInfoFragment : Fragment() {
         viewModel.populateVoterInfo(args.argElectionId, args.argDivision)
 
         viewModel.voterInfo.observe(viewLifecycleOwner, Observer {
-            binding.voterInfo=it
+            binding.voterInfo = it
         })
 
         viewModel.loadUrlIntent.observe(viewLifecycleOwner, Observer {
             loadUrl(it)
         })
 
-        viewModel.showToast.observe(viewLifecycleOwner, Observer {
-            requireActivity().showSnackBar(it,binding.root)
+        viewModel.showPrompt.observe(viewLifecycleOwner, Observer {
+            requireActivity().showSnackBar(it, binding.root)
             findNavController().popBackStack()
         })
 
@@ -64,6 +59,20 @@ class VoterInfoFragment : Fragment() {
 
         //TODO: Handle save button UI state
         //TODO: cont'd Handle save button clicks
+        viewModel.onSaveButtonClicked.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                findNavController().popBackStack()
+            }
+        })
+
+        viewModel.isElectionAvailableLocally.observe(viewLifecycleOwner, Observer {
+            it?.let { availableLocally ->
+                binding.buttonSaveElection.apply {
+                    text = if (availableLocally) getString(R.string.un_follow_election)
+                    else getString(R.string.follow_election)
+                }
+            }
+        })
 
         return binding.root
 
@@ -71,12 +80,12 @@ class VoterInfoFragment : Fragment() {
 
     //TODO: DONE Create method to load URL intents
 
-   private fun loadUrl(intent: Intent?) {
+    private fun loadUrl(intent: Intent?) {
         intent?.let {
             startActivity(intent)
             return
         }
-        Toast.makeText(requireActivity(),"Information not available",Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireActivity(), "Information not available", Toast.LENGTH_SHORT).show()
     }
 
 }

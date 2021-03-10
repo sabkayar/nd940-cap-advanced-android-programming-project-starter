@@ -7,6 +7,7 @@ import com.example.android.politicalpreparedness.MainViewModel
 import com.example.android.politicalpreparedness.database.ElectionDao
 import com.example.android.politicalpreparedness.network.CivicsApi
 import com.example.android.politicalpreparedness.network.models.Division
+import com.example.android.politicalpreparedness.network.models.Election
 import com.example.android.politicalpreparedness.network.models.VoterInfoResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -23,7 +24,6 @@ class VoterInfoViewModel(private val dataSource: ElectionDao) : MainViewModel() 
 
     //TODO: Add var and methods to populate voter info
     fun populateVoterInfo(argElectionId: Int, argDivision: Division) {
-        Timber.d("$argElectionId ${argDivision.toString()}")
         viewModelScope.launch {
             try {
                 withContext(Dispatchers.IO) {
@@ -35,8 +35,9 @@ class VoterInfoViewModel(private val dataSource: ElectionDao) : MainViewModel() 
                 }
             } catch (e: Exception) {
                 Timber.e("Error: ${e.message}")
-                showToastMutable.value = "Data not found!!"
+                showPromptMutable.value = "Data not found!!"
             }
+            setupButtonText(argElectionId)
         }
     }
 
@@ -44,6 +45,43 @@ class VoterInfoViewModel(private val dataSource: ElectionDao) : MainViewModel() 
 
     //TODO: Add var and methods to save and remove elections to local database
     //TODO: cont'd -- Populate initial state of save button to reflect proper action based on election saved status
+
+
+    private val _isElectionAvailableLocally = MutableLiveData<Boolean?>()
+    val isElectionAvailableLocally: LiveData<Boolean?>
+        get() = _isElectionAvailableLocally
+
+
+    private val _onSaveButtonClicked = MutableLiveData<Boolean?>()
+    val onSaveButtonClicked: LiveData<Boolean?>
+        get() = _onSaveButtonClicked
+
+
+    fun onSaveButtonClicked(election: Election) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                val item = dataSource.getElection(election.id)
+                if (item == null) {
+                    dataSource.insertAll(election)
+                } else {
+                    dataSource.deleteElection(election.id)
+                }
+            }
+            _onSaveButtonClicked.value = true
+        }
+    }
+
+
+    private fun setupButtonText(electionID: Int) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                val item = dataSource.getElection(electionID)
+                withContext(Dispatchers.Main) {
+                    _isElectionAvailableLocally.value = (item != null)
+                }
+            }
+        }
+    }
 
     /**
      * Hint: The saved state can be accomplished in multiple ways. It is directly related to how elections are saved/removed from the database.

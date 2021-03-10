@@ -13,11 +13,11 @@ interface ElectionDao {
 
     //TODO: DONE Add select all election query
     @Query("select * from election_table")
-    suspend fun getAllElections():List<Election>
+    suspend fun getAllElections():List<Election>?
 
     //TODO: DONE Add select single election query
     @Query("select * from election_table where id=:id")
-    suspend fun getElection(id:Int):Election
+    suspend fun getElection(id:Int):Election?
 
     //TODO: DONE Add delete query
     @Query("delete from election_table where id=:id")

@@ -97,7 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:setVisibility="@{viewModel.voterInfo.election.name}"
-            app:constraint_referenced_ids="election_name,election_date,state_header,state_locations,state_ballot" />
+            app:constraint_referenced_ids="election_name,election_date,state_header,state_locations,state_ballot,buttonSaveElection" />
 
         <!-- TODO: Add visual styling and content -->
         <TextView
@@ -123,6 +123,21 @@
             app:layout_constraintStart_toStartOf="@id/election_date" />
 
         <!-- TODO: Add button to save election to Room -->
+        <Button
+            android:id="@+id/buttonSaveElection"
+            style="@style/buttonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/normal_margin"
+            android:layout_marginEnd="@dimen/normal_margin"
+            android:layout_marginBottom="@dimen/normal_margin"
+            android:padding="@dimen/default_padding"
+            android:text="@string/follow_election"
+            android:onClick="@{()->viewModel.onSaveButtonClicked(voterInfo.election)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
