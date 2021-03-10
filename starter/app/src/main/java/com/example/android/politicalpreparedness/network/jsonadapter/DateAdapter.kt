@@ -6,15 +6,19 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class DateAdapter {
-    private val format = SimpleDateFormat("yyyy-MM-dd",Locale.getDefault())
+    private val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
     @FromJson
-    fun dateFromJson(dateStr: String): Date {
+    fun dateFromJson(dateStr: String): Date? {
         return format.parse(dateStr)
     }
 
     @ToJson
-    fun dateToJson(date: Date): String {
-        return format.format(date)
+    fun dateToJson(date: Date?): String {
+        return try {
+            format.format(date!!)
+        } catch (exception: Exception) {
+            ""
+        }
     }
 }
