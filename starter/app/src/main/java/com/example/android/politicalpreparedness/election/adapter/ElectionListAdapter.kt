@@ -9,7 +9,7 @@ import com.example.android.politicalpreparedness.databinding.ListItemElectionBin
 import com.example.android.politicalpreparedness.network.models.Election
 import kotlinx.coroutines.withContext
 
-class ElectionListAdapter(val clickListener: ElectionClickListener) : ListAdapter<Election, ViewHolder>(ElectionDiffCallback()) {
+class ElectionListAdapter(private val clickListener: ElectionClickListener) : ListAdapter<Election, ViewHolder>(ElectionDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
     }
