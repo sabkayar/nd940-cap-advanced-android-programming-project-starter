@@ -1,6 +1,8 @@
 package com.example.android.politicalpreparedness
 
 import android.view.View
+import android.widget.AdapterView
+import android.widget.Spinner
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.example.android.politicalpreparedness.network.jsonadapter.DateAdapter
@@ -18,5 +20,6 @@ fun View.setVisibility(value: String?) {
     } else {
         View.VISIBLE
     }
+
 }
 
