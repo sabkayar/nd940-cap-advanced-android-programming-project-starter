@@ -18,6 +18,9 @@
     <string name="zip">Zip</string>
     <string name="use_my_location">Use My Location</string>
     <string name="my_representatives">My Representatives</string>
+    <string name="web_icon_image">Web icon image</string>
+    <string name="facebook_icon_image">Facebook icon image</string>
+    <string name="twitter_icon_image">Twitter icon image</string>
 
     <!-- TODO: Add necessary string values -->
 

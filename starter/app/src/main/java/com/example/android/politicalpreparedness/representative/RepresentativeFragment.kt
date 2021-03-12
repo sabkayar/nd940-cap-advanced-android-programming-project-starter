@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.android.politicalpreparedness.databinding.FragmentRepresentativeBinding
+import com.example.android.politicalpreparedness.loadUrl
 import com.example.android.politicalpreparedness.network.models.Address
 import com.example.android.politicalpreparedness.representative.model.Item
 
@@ -21,6 +23,11 @@ class RepresentativeFragment : Fragment() {
         binding.address = Address()
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
+
+        viewModel.loadUrlIntent.observe(viewLifecycleOwner, Observer {
+            requireActivity().loadUrl(it)
+        })
 
         return binding.root
     }

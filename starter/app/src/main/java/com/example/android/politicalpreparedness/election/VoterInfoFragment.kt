@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.database.ElectionDatabase
 import com.example.android.politicalpreparedness.databinding.FragmentVoterInfoBinding
+import com.example.android.politicalpreparedness.loadUrl
 import com.example.android.politicalpreparedness.showSnackBar
 
 class VoterInfoFragment : Fragment() {
@@ -41,7 +42,7 @@ class VoterInfoFragment : Fragment() {
         })
 
         viewModel.loadUrlIntent.observe(viewLifecycleOwner, Observer {
-            loadUrl(it)
+            requireActivity().loadUrl(it)
         })
 
         viewModel.showPrompt.observe(viewLifecycleOwner, Observer {
@@ -80,13 +81,6 @@ class VoterInfoFragment : Fragment() {
 
     //TODO: DONE Create method to load URL intents
 
-    private fun loadUrl(intent: Intent?) {
-        intent?.let {
-            startActivity(intent)
-            return
-        }
-        Toast.makeText(requireActivity(), "Information not available", Toast.LENGTH_SHORT).show()
-    }
 
 }
 

@@ -1,10 +1,13 @@
 package com.example.android.politicalpreparedness
 
+import android.net.Uri
 import android.view.View
 import android.widget.AdapterView
+import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
 import com.example.android.politicalpreparedness.network.jsonadapter.DateAdapter
 import java.util.*
 
@@ -19,6 +22,16 @@ fun View.setVisibility(value: String?) {
         View.GONE
     } else {
         View.VISIBLE
+    }
+
+}
+
+@BindingAdapter("setUrl")
+fun ImageView.loadImage(url: String?) {
+    url?.let {
+        Glide.with(this).load(Uri.parse(it)).centerCrop()
+                .placeholder(R.drawable.loading_img)
+                .into(this)
     }
 
 }
