@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.network.CivicsApi
 import com.example.android.politicalpreparedness.network.models.Address
+import com.example.android.politicalpreparedness.representative.model.Representative
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -22,8 +23,13 @@ class RepresentativeViewModel(private val appContext: Application) : AndroidView
         viewModelScope.launch {
             try {
                 withContext(Dispatchers.IO) {
-                    val result = CivicsApi.retrofitService.getRepresentatives(address.getAddressForApi())
-                    Timber.d(result.toString())
+                    val repsResponse = CivicsApi.retrofitService.getRepresentatives(address.getAddressForApi())
+                    Timber.d("Response: $repsResponse")
+                    val repsList= mutableListOf<Representative>()
+                    for(office in repsResponse.offices){
+                      repsList.addAll(office.getRepresentatives(repsResponse.officials))
+                    }
+                    Timber.d("Representatives: $repsList")
                 }
             } catch (e: Exception) {
                 Timber.e(e.localizedMessage)
