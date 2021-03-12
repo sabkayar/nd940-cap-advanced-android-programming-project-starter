@@ -8,7 +8,9 @@ import android.widget.Spinner
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.example.android.politicalpreparedness.network.jsonadapter.DateAdapter
+import com.example.android.politicalpreparedness.utils.GlideApp
 import java.util.*
 
 @BindingAdapter("android:date")
@@ -29,7 +31,9 @@ fun View.setVisibility(value: String?) {
 @BindingAdapter("setUrl")
 fun ImageView.loadImage(url: String?) {
     url?.let {
-        Glide.with(this).load(Uri.parse(it)).centerCrop()
+        GlideApp.with(this).load(url)
+                .centerCrop()
+                .transform(CircleCrop())
                 .placeholder(R.drawable.loading_img)
                 .into(this)
         return

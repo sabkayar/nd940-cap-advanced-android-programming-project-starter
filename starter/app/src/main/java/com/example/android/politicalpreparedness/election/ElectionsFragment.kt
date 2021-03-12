@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.database.ElectionDatabase
@@ -26,6 +27,7 @@ class ElectionsFragment : Fragment() {
         ).get(ElectionsViewModel::class.java)
     }
     lateinit var binding: FragmentElectionBinding
+    lateinit var navController: NavController
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -58,6 +60,8 @@ class ElectionsFragment : Fragment() {
         binding.upcomingElectionRecyclerView.adapter = electionListAdapter
         binding.savedElectionsRecyclerView.adapter = savedElectionListAdapter
 
+        navController=this.findNavController()
+
         viewModel.upcomingElections.observe(viewLifecycleOwner, Observer {
             electionListAdapter.submitList(it)
         })
@@ -72,7 +76,7 @@ class ElectionsFragment : Fragment() {
 
         viewModel.navigateToVoterInfo.observe(viewLifecycleOwner, Observer {
             it?.let {
-                this.findNavController().navigate(ElectionsFragmentDirections.actionElectionsFragmentToVoterInfoFragment(it.id, it.division))
+                navController.navigate(ElectionsFragmentDirections.actionElectionsFragmentToVoterInfoFragment(it.id, it.division))
                 viewModel.doneNavigatingToVoterInfo()
             }
         })
