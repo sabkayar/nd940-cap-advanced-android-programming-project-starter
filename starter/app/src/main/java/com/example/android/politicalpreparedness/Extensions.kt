@@ -30,4 +30,7 @@ enum class CHANNEL(baseUrl: String) {
     init {
         this.baseUrl = baseUrl
     }
+    companion object{
+
+    }
 }

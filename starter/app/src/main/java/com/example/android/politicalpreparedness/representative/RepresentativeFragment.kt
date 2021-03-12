@@ -29,6 +29,12 @@ class RepresentativeFragment : Fragment() {
             requireActivity().loadUrl(it)
         })
 
+        val adapter=RepresentativeAdapter(viewModel)
+        binding.representativesRecyclerView.adapter=adapter
+        viewModel.representatives.observe(viewLifecycleOwner, Observer {
+            adapter.submitList(it)
+        })
+
         return binding.root
     }
 }

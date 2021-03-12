@@ -19,28 +19,31 @@ import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 class RepresentativeViewModel(private val appContext: Application) : AndroidViewModel(appContext) {
-
-
-    private fun getState(position: Int): String {
-        return appContext.resources.getStringArray(R.array.states)[position]
-    }
+    private val _representatives = MutableLiveData<List<Representative>>()
+    val representatives: LiveData<List<Representative>>
+        get() = _representatives
 
     fun onFindMyRepsClicked(address: Address) {
         viewModelScope.launch {
             try {
                 withContext(Dispatchers.IO) {
-                    val repsResponse = CivicsApi.retrofitService.getRepresentatives(address.getAddressForApi())
-                    Timber.d("Response: $repsResponse")
                     val repsList = mutableListOf<Representative>()
+                    val repsResponse = CivicsApi.retrofitService.getRepresentatives(address.getAddressForApi())
                     for (office in repsResponse.offices) {
                         repsList.addAll(office.getRepresentatives(repsResponse.officials))
                     }
-                    Timber.d("Representatives: $repsList")
+                    withContext(Dispatchers.Main){
+                        _representatives.value=repsList
+                    }
                 }
             } catch (e: Exception) {
                 Timber.e(e.localizedMessage)
             }
         }
+    }
+
+    private fun getState(position: Int): String {
+        return appContext.resources.getStringArray(R.array.states)[position]
     }
 
     private val _loadUrlIntent = MutableLiveData<Intent>()
@@ -65,7 +68,7 @@ class RepresentativeViewModel(private val appContext: Application) : AndroidView
                     }
                 }
                 id?.let {
-                  url= CHANNEL.FACEBOOK.baseUrl+id
+                    url = CHANNEL.FACEBOOK.baseUrl + id
                 }
             }
             CHANNEL.TWITTER -> {
@@ -79,16 +82,16 @@ class RepresentativeViewModel(private val appContext: Application) : AndroidView
                     }
                 }
                 id?.let {
-                    url= CHANNEL.TWITTER.baseUrl+id
+                    url = CHANNEL.TWITTER.baseUrl + id
                 }
             }
         }
 
         if (!url.isNullOrEmpty()) {
-                         _loadUrlIntent.value = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                     } else {
-                         _loadUrlIntent.value = null
-                     }
+            _loadUrlIntent.value = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        } else {
+            _loadUrlIntent.value = null
+        }
     }
 
 

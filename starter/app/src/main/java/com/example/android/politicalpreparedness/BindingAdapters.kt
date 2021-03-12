@@ -32,7 +32,9 @@ fun ImageView.loadImage(url: String?) {
         Glide.with(this).load(Uri.parse(it)).centerCrop()
                 .placeholder(R.drawable.loading_img)
                 .into(this)
+        return
     }
 
+   this.setImageResource(R.drawable.ic_profile)
 }
 
