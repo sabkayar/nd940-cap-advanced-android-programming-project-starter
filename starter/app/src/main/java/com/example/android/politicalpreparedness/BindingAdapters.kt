@@ -30,15 +30,10 @@ fun View.setVisibility(value: String?) {
 
 @BindingAdapter("setUrl")
 fun ImageView.loadImage(url: String?) {
-    url?.let {
         GlideApp.with(this).load(url)
                 .centerCrop()
                 .transform(CircleCrop())
-                .placeholder(R.drawable.loading_img)
+                .placeholder(R.drawable.ic_profile)
                 .into(this)
-        return
-    }
-
-   this.setImageResource(R.drawable.ic_profile)
 }
 
