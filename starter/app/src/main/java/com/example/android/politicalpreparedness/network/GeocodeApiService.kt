@@ -1,11 +1,6 @@
 package com.example.android.politicalpreparedness.network
 
-import com.example.android.politicalpreparedness.network.jsonadapter.DateAdapter
-import com.example.android.politicalpreparedness.network.jsonadapter.ElectionAdapter
-import com.example.android.politicalpreparedness.network.models.ElectionResponse
 import com.example.android.politicalpreparedness.network.models.GeoCoding
-import com.example.android.politicalpreparedness.network.models.VoterInfoResponse
-import com.example.android.politicalpreparedness.representative.model.RepsResponse
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -14,7 +9,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-private const val BASE_URL = "https://maps.googleapis.com/maps/api/"
+private const val BASE_URL = "https://maps.googleapis.com/maps/api/geocode/"
 
 
 private val moshi = Moshi.Builder()
@@ -33,7 +28,7 @@ private val retrofit = Retrofit.Builder()
  */
 
 interface GeocodeApiService {
-    @GET("geocode/json")
+    @GET("json")
     suspend fun getGeoCodes(@Query("latlng") latLong: String): GeoCoding
 }
 

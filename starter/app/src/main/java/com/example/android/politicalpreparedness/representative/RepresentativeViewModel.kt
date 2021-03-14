@@ -3,6 +3,7 @@ package com.example.android.politicalpreparedness.representative
 import android.app.Application
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,6 +11,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.android.politicalpreparedness.CHANNEL
 import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.network.CivicsApi
+import com.example.android.politicalpreparedness.network.GeocodeApi
 import com.example.android.politicalpreparedness.network.models.Address
 import com.example.android.politicalpreparedness.network.models.Official
 import com.example.android.politicalpreparedness.representative.model.Representative
@@ -38,6 +40,19 @@ class RepresentativeViewModel(private val appContext: Application) : AndroidView
                 }
             } catch (e: Exception) {
                 Timber.e(e.localizedMessage)
+            }
+        }
+    }
+
+    fun useMyLocationClicked(){
+        viewModelScope.launch {
+            try {
+                withContext(Dispatchers.IO) {
+                    val result = GeocodeApi.retrofitService.getGeoCodes("40.714224,-73.961452")
+                    Timber.d(result.toString())
+                }
+            }catch (e:Exception){
+               Timber.e(e.localizedMessage)
             }
         }
     }

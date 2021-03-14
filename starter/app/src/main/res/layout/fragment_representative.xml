@@ -120,6 +120,7 @@
             android:layout_marginTop="0dp"
             android:layout_marginStart="@dimen/small_margin"
             android:layout_marginEnd="@dimen/small_margin"
+            android:onClick="@{()->viewModel.useMyLocationClicked()}"
             android:layout_marginBottom="@dimen/small_margin"
             android:text="@string/use_my_location"
             app:layout_constraintTop_toBottomOf="@id/button_search" />
