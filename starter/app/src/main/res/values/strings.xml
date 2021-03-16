@@ -21,6 +21,11 @@
     <string name="web_icon_image">Web icon image</string>
     <string name="facebook_icon_image">Facebook icon image</string>
     <string name="twitter_icon_image">Twitter icon image</string>
+    <string name="location_required_error">Location services must be enabled to use the app</string>
+    <string name="access_coarse_location">Permission Required ACCESS_COARSE_LOCATION</string>
+    <string name="access_fine_location">Permission Required ACCESS_FINE_LOCATION</string>
+    <string name="settings">Settings</string>
+    <string name="permission_denied_explanation">" You need to grant location permission in order to use this feature."</string>
 
     <!-- TODO: Add necessary string values -->
 

@@ -3,7 +3,9 @@ package com.example.android.politicalpreparedness.representative
 import android.app.Application
 import android.content.Intent
 import android.net.Uri
+import android.renderscript.BaseObj
 import android.util.Log
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -34,8 +36,8 @@ class RepresentativeViewModel(private val appContext: Application) : AndroidView
                     for (office in repsResponse.offices) {
                         repsList.addAll(office.getRepresentatives(repsResponse.officials))
                     }
-                    withContext(Dispatchers.Main){
-                        _representatives.value=repsList
+                    withContext(Dispatchers.Main) {
+                        _representatives.value = repsList
                     }
                 }
             } catch (e: Exception) {
@@ -44,18 +46,32 @@ class RepresentativeViewModel(private val appContext: Application) : AndroidView
         }
     }
 
-    fun useMyLocationClicked(){
-        viewModelScope.launch {
-            try {
-                withContext(Dispatchers.IO) {
-                    val result = GeocodeApi.retrofitService.getGeoCodes("40.714224,-73.961452")
-                    Timber.d(result.toString())
-                }
-            }catch (e:Exception){
-               Timber.e(e.localizedMessage)
-            }
-        }
+
+    private val _useMyLocationClicked = MutableLiveData<Boolean?>()
+    val useMyLocationClicked: LiveData<Boolean?>
+        get() = _useMyLocationClicked
+
+    fun useMyLocationClicked() {
+        _useMyLocationClicked.value = true
     }
+
+    fun callGeoCodingApi(latLng:String){
+         viewModelScope.launch {
+               try {
+                   withContext(Dispatchers.IO) {
+                       val result = GeocodeApi.retrofitService.getGeoCodes(latLng)
+                       Timber.d(result.toString())
+                   }
+               } catch (e: Exception) {
+                   Timber.e(e.localizedMessage)
+               }
+           }
+    }
+
+    fun useMyLocationClickDone() {
+        _useMyLocationClicked.value = false
+    }
+
 
     private fun getState(position: Int): String {
         return appContext.resources.getStringArray(R.array.states)[position]
