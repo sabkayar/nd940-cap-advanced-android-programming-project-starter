@@ -215,6 +215,7 @@ class RepresentativeFragment : Fragment() {
                 locationCallback,
                 Looper.getMainLooper())
     }
+
     private fun stopLocationUpdates() {
         fusedLocationClient.removeLocationUpdates(locationCallback)
     }
@@ -224,13 +225,16 @@ class RepresentativeFragment : Fragment() {
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult?) {
                 locationResult ?: return
+                var latLng = "0.0, 0.0"
                 for (location in locationResult.locations) {
                     // Update UI with location data
                     // ...
-                    val latLng = "${location.latitude}, ${location.longitude}"
+                    latLng = "${location.latitude}, ${location.longitude}"
                     Timber.d(latLng)
-                    viewModel.callGeoCodingApi(latLng)
                 }
+                stopLocationUpdates()
+                Timber.d("Latest Location: $latLng")
+                viewModel.callGeoCodingApi(latLng)
             }
         }
     }
