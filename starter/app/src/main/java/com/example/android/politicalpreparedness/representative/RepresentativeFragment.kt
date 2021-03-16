@@ -77,8 +77,8 @@ class RepresentativeFragment : Fragment() {
     private val locationRequest: LocationRequest
         get() {
             return LocationRequest.create().apply {
-                /*  interval = 10000
-                  fastestInterval = 5000*/
+                  interval = 10000
+                  fastestInterval = 5000
                 priority = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY
             }
         }
