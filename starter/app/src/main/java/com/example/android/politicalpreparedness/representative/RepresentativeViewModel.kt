@@ -55,17 +55,50 @@ class RepresentativeViewModel(private val appContext: Application) : AndroidView
         _useMyLocationClicked.value = true
     }
 
-    fun callGeoCodingApi(latLng:String){
-         viewModelScope.launch {
-               try {
-                   withContext(Dispatchers.IO) {
-                       val result = GeocodeApi.retrofitService.getGeoCodes(latLng)
-                       Timber.d(result.toString())
-                   }
-               } catch (e: Exception) {
-                   Timber.e(e.localizedMessage)
-               }
-           }
+    fun callGeoCodingApi(latLng: String) {
+        viewModelScope.launch {
+            try {
+                withContext(Dispatchers.IO) {
+                    val result = GeocodeApi.retrofitService.getGeoCodes(latLng)
+                    Timber.d(result.toString())
+
+                    val address: Address = Address()
+                    for (component in result.results[0].address_components) {
+                        if (component.types?.get(0) == "administrative_area_level_1") {
+                            address.state = component.long_name!!
+                        }
+                        if (component.types?.get(0) == "country") {
+                            address.city = component.long_name!!
+                        }
+                        if (component.types?.get(0) == "postal_code") {
+                            address.zip = component.long_name!!
+                        }
+                    }
+
+                    val formattedAddress = result.results[0].formatted_address
+                    val arrayOfAddress = formattedAddress?.split(",")
+                    when (arrayOfAddress?.size) {
+                        2 -> {
+                            address.line1 = arrayOfAddress[0]
+                        }
+                        3 -> {
+                            address.line1 = arrayOfAddress[0]
+                            address.line2 = arrayOfAddress[1]
+                        }
+                        4 -> {
+                            address.line1 = arrayOfAddress[0]
+                            address.line2 = arrayOfAddress[1]
+                        }
+                    }
+                    Timber.d("Formatted Address: ${address}")
+
+                    //populateAddressFields()
+                    //call Representatives API
+                }
+            } catch (e: Exception) {
+                Timber.e(e.localizedMessage)
+            }
+        }
     }
 
     fun useMyLocationClickDone() {
