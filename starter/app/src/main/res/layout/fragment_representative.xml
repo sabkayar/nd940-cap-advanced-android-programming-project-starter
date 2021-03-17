@@ -108,7 +108,7 @@
             style="@style/buttonStyle"
             android:layout_margin="@dimen/small_margin"
             android:text="@string/find_my_representatives"
-            android:onClick="@{()->viewModel.onFindMyRepsClicked(address)}"
+            android:onClick="@{()->viewModel.callRepresentativesApi(address)}"
             app:layout_constraintTop_toBottomOf="@id/zip" />
 
         <!-- TODO: Add visual styling and content -->

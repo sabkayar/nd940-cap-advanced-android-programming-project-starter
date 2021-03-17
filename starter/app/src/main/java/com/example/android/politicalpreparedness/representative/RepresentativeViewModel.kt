@@ -3,9 +3,6 @@ package com.example.android.politicalpreparedness.representative
 import android.app.Application
 import android.content.Intent
 import android.net.Uri
-import android.renderscript.BaseObj
-import android.util.Log
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -27,12 +24,13 @@ class RepresentativeViewModel(private val appContext: Application) : AndroidView
     val representatives: LiveData<List<Representative>>
         get() = _representatives
 
-    fun onFindMyRepsClicked(address: Address) {
+    fun callRepresentativesApi(address: Address) {
         viewModelScope.launch {
             try {
                 withContext(Dispatchers.IO) {
                     val repsList = mutableListOf<Representative>()
                     val repsResponse = CivicsApi.retrofitService.getRepresentatives(address.getAddressForApi())
+                    Timber.d(repsResponse.toString())
                     for (office in repsResponse.offices) {
                         repsList.addAll(office.getRepresentatives(repsResponse.officials))
                     }
@@ -55,6 +53,11 @@ class RepresentativeViewModel(private val appContext: Application) : AndroidView
         _useMyLocationClicked.value = true
     }
 
+
+    private val _geoAddress = MutableLiveData<Address?>()
+    val geoAddress: LiveData<Address?>
+        get() = _geoAddress
+
     fun callGeoCodingApi(latLng: String) {
         viewModelScope.launch {
             try {
@@ -67,7 +70,7 @@ class RepresentativeViewModel(private val appContext: Application) : AndroidView
                         if (component.types?.get(0) == "administrative_area_level_1") {
                             address.state = component.long_name!!
                         }
-                        if (component.types?.get(0) == "country") {
+                        if (component.types?.get(0) == "locality") {
                             address.city = component.long_name!!
                         }
                         if (component.types?.get(0) == "postal_code") {
@@ -92,6 +95,9 @@ class RepresentativeViewModel(private val appContext: Application) : AndroidView
                     }
                     Timber.d("Formatted Address: ${address}")
 
+                    withContext(Dispatchers.Main) {
+                        _geoAddress.value = address
+                    }
                     //populateAddressFields()
                     //call Representatives API
                 }
