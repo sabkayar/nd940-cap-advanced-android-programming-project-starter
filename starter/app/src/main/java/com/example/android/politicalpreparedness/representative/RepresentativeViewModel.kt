@@ -118,10 +118,12 @@ class RepresentativeViewModel(private val appContext: Application) : AndroidView
 
 
     private fun getState(position: Int): String {
+        if (position < 0) return ""
         return appContext.resources.getStringArray(R.array.states)[position]
     }
 
     fun getPosition(state: String): Int {
+        if(state.isEmpty()) return 0
         return appContext.resources.getStringArray(R.array.states).indexOf(state)
     }
 

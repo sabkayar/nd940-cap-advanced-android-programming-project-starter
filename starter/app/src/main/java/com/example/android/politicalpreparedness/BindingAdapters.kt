@@ -26,10 +26,16 @@ fun View.setVisibility(value: String?) {
 
 @BindingAdapter("setUrl")
 fun ImageView.loadImage(url: String?) {
+    try {
         GlideApp.with(this).load(url)
                 .centerCrop()
                 .transform(CircleCrop())
                 .placeholder(R.drawable.ic_profile)
                 .into(this)
+    } catch (e: Exception) {
+        e.printStackTrace()
+        setImageResource(R.drawable.ic_profile)
+    }
+
 }
 
