@@ -11,6 +11,9 @@
         <variable
             name="address"
             type="com.example.android.politicalpreparedness.network.models.Address" />
+        <variable
+            name="item"
+            type="com.example.android.politicalpreparedness.representative.model.Item" />
     </data>
 
     <!-- TODO: Add motion scene to hide form on vertical scroll. -->
@@ -80,6 +83,7 @@
             android:autofillHints=""
             android:entries="@array/states"
             android:inputType="textPostalAddress"
+            android:selectedItemPosition="@={item.selectedItemPosition}"
             app:layout_constraintStart_toEndOf="@id/city"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/city"
@@ -108,7 +112,7 @@
             style="@style/buttonStyle"
             android:layout_margin="@dimen/small_margin"
             android:text="@string/find_my_representatives"
-            android:onClick="@{()->viewModel.callRepresentativesApi(address)}"
+            android:onClick="@{()->viewModel.callRepresentativesApi(address,item)}"
             app:layout_constraintTop_toBottomOf="@id/zip" />
 
         <!-- TODO: Add visual styling and content -->

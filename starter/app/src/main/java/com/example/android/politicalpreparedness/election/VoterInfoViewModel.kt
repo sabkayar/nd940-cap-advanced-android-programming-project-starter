@@ -13,7 +13,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
-import java.lang.IllegalArgumentException
 
 class VoterInfoViewModel(private val dataSource: ElectionDao) : MainViewModel() {
 
@@ -87,8 +86,8 @@ class VoterInfoViewModel(private val dataSource: ElectionDao) : MainViewModel() 
      * Hint: The saved state can be accomplished in multiple ways. It is directly related to how elections are saved/removed from the database.
      */
 
-    private val _loadUrlIntent = MutableLiveData<Intent>()
-    val loadUrlIntent: LiveData<Intent>
+    private val _loadUrlIntent = MutableLiveData<Intent?>()
+    val loadUrlIntent: LiveData<Intent?>
         get() = _loadUrlIntent
 
     fun loadUrlIntent(url: String?) {
@@ -97,6 +96,10 @@ class VoterInfoViewModel(private val dataSource: ElectionDao) : MainViewModel() 
         } else {
             _loadUrlIntent.value = null
         }
+    }
+
+    fun doneLoadingUrlIntent() {
+        _loadUrlIntent.value = null
     }
 
 }

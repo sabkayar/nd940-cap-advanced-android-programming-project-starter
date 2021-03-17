@@ -22,6 +22,7 @@ import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.databinding.FragmentRepresentativeBinding
 import com.example.android.politicalpreparedness.loadUrl
 import com.example.android.politicalpreparedness.network.models.Address
+import com.example.android.politicalpreparedness.representative.model.Item
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import com.google.android.gms.tasks.Task
@@ -41,12 +42,16 @@ class RepresentativeFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentRepresentativeBinding.inflate(inflater, container, false)
         binding.address = Address()
+        binding.item = Item()
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
 
         viewModel.loadUrlIntent.observe(viewLifecycleOwner, Observer {
-            requireActivity().loadUrl(it)
+            it?.let {
+                requireActivity().loadUrl(it)
+                viewModel.doneLoadingUrlIntent()
+            }
         })
 
         val adapter = RepresentativeAdapter(viewModel)
@@ -70,8 +75,12 @@ class RepresentativeFragment : Fragment() {
 
         viewModel.geoAddress.observe(viewLifecycleOwner, Observer { address ->
             address?.let {
-                binding.address=address
-                viewModel.callRepresentativesApi(address)
+                binding.address = address
+                val selectedPos = viewModel.getPosition(address.state)
+                val item = Item()
+                item.selectedItemPosition = selectedPos
+                binding.item = item
+                viewModel.callRepresentativesApi(address, binding.item)
             }
         })
 

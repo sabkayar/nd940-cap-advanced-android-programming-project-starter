@@ -13,24 +13,29 @@ import com.example.android.politicalpreparedness.network.CivicsApi
 import com.example.android.politicalpreparedness.network.GeocodeApi
 import com.example.android.politicalpreparedness.network.models.Address
 import com.example.android.politicalpreparedness.network.models.Official
+import com.example.android.politicalpreparedness.representative.model.Item
 import com.example.android.politicalpreparedness.representative.model.Representative
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
+
 class RepresentativeViewModel(private val appContext: Application) : AndroidViewModel(appContext) {
     private val _representatives = MutableLiveData<List<Representative>>()
     val representatives: LiveData<List<Representative>>
         get() = _representatives
 
-    fun callRepresentativesApi(address: Address) {
+    fun callRepresentativesApi(address: Address, item: Item?) {
         viewModelScope.launch {
+            Timber.d("Item Selected: ${item?.selectedItemPosition}")
+            address.state = getState(item?.selectedItemPosition!!)
             try {
                 withContext(Dispatchers.IO) {
+                    Timber.d("Input: ${address.getAddressForApi()}")
                     val repsList = mutableListOf<Representative>()
                     val repsResponse = CivicsApi.retrofitService.getRepresentatives(address.getAddressForApi())
-                    Timber.d(repsResponse.toString())
+                    Timber.d("Output: $repsResponse")
                     for (office in repsResponse.offices) {
                         repsList.addAll(office.getRepresentatives(repsResponse.officials))
                     }
@@ -51,6 +56,10 @@ class RepresentativeViewModel(private val appContext: Application) : AndroidView
 
     fun useMyLocationClicked() {
         _useMyLocationClicked.value = true
+    }
+
+    fun useMyLocationClickDone() {
+        _useMyLocationClicked.value = false
     }
 
 
@@ -107,17 +116,17 @@ class RepresentativeViewModel(private val appContext: Application) : AndroidView
         }
     }
 
-    fun useMyLocationClickDone() {
-        _useMyLocationClicked.value = false
-    }
-
 
     private fun getState(position: Int): String {
         return appContext.resources.getStringArray(R.array.states)[position]
     }
 
-    private val _loadUrlIntent = MutableLiveData<Intent>()
-    val loadUrlIntent: LiveData<Intent>
+    fun getPosition(state: String): Int {
+        return appContext.resources.getStringArray(R.array.states).indexOf(state)
+    }
+
+    private val _loadUrlIntent = MutableLiveData<Intent?>()
+    val loadUrlIntent: LiveData<Intent?>
         get() = _loadUrlIntent
 
     fun loadUrlIntent(mode: CHANNEL, official: Official) {
@@ -164,5 +173,8 @@ class RepresentativeViewModel(private val appContext: Application) : AndroidView
         }
     }
 
+    fun doneLoadingUrlIntent() {
+        _loadUrlIntent.value = null
+    }
 
 }

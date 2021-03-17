@@ -42,7 +42,10 @@ class VoterInfoFragment : Fragment() {
         })
 
         viewModel.loadUrlIntent.observe(viewLifecycleOwner, Observer {
-            requireActivity().loadUrl(it)
+            it?.let {
+                requireActivity().loadUrl(it)
+                viewModel.doneLoadingUrlIntent()
+            }
         })
 
         viewModel.showPrompt.observe(viewLifecycleOwner, Observer {
