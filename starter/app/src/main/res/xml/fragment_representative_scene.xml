@@ -8,7 +8,7 @@
 
         <!-- TODO: Add visual styling and content -->
         <Constraint
-            android:visibility="visible"
+            android:alpha="1.0"
             android:id="@+id/search_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
         <!-- TODO: Add data binding value -->
         <!-- TODO: Add visual styling and content -->
         <Constraint
-            android:visibility="visible"
+            android:alpha="1.0"
             android:id="@+id/address_line_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
         <!-- TODO: Add data binding value -->
         <!-- TODO: Add visual styling and content -->
         <Constraint
-            android:visibility="visible"
+            android:alpha="1.0"
             android:id="@+id/address_line_2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -49,7 +49,7 @@
         <!-- TODO: Add data binding value -->
         <!-- TODO: Add visual styling and content -->
         <Constraint
-            android:visibility="visible"
+            android:alpha="1.0"
             android:id="@+id/city"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
         <!-- TODO: Add data binding value -->
         <!-- TODO: Add visual styling and content -->
         <Constraint
-            android:visibility="visible"
+            android:alpha="1.0"
             android:id="@+id/state"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -81,7 +81,7 @@
         <!-- TODO: Add data binding value -->
         <!-- TODO: Add visual styling and content -->
         <Constraint
-            android:visibility="visible"
+            android:alpha="1.0"
             android:id="@+id/zip"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -96,19 +96,21 @@
 
         <!-- TODO: Add visual styling and label -->
         <Constraint
-            android:visibility="visible"
+            android:alpha="1.0"
             android:id="@+id/button_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/buttonStyle"
-            android:layout_margin="@dimen/small_margin"
+            android:layout_marginStart="@dimen/small_margin"
+            android:layout_marginEnd="@dimen/small_margin"
+            android:layout_marginBottom="@dimen/small_margin"
+            android:layout_marginTop="@dimen/small_margin"
             android:text="@string/find_my_representatives"
-            android:onClick="@{()->viewModel.callRepresentativesApi(address,item)}"
             app:layout_constraintTop_toBottomOf="@id/zip" />
 
         <!-- TODO: Add visual styling and content -->
         <Constraint
-            android:visibility="visible"
+            android:alpha="1.0"
             android:id="@+id/button_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -148,7 +150,7 @@
     <ConstraintSet android:id="@+id/end">
         <!-- TODO: Add visual styling and content -->
         <Constraint
-            android:visibility="gone"
+            android:alpha="0.0"
             android:id="@+id/search_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -161,7 +163,7 @@
         <!-- TODO: Add data binding value -->
         <!-- TODO: Add visual styling and content -->
         <Constraint
-            android:visibility="gone"
+            android:alpha="0.0"
             android:id="@+id/address_line_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -175,7 +177,7 @@
         <!-- TODO: Add data binding value -->
         <!-- TODO: Add visual styling and content -->
         <Constraint
-            android:visibility="gone"
+            android:alpha="0.0"
             android:id="@+id/address_line_2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -189,7 +191,7 @@
         <!-- TODO: Add data binding value -->
         <!-- TODO: Add visual styling and content -->
         <Constraint
-            android:visibility="gone"
+            android:alpha="0.0"
             android:id="@+id/city"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -205,7 +207,7 @@
         <!-- TODO: Add data binding value -->
         <!-- TODO: Add visual styling and content -->
         <Constraint
-            android:visibility="gone"
+            android:alpha="0.0"
             android:id="@+id/state"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -220,7 +222,7 @@
         <!-- TODO: Add data binding value -->
         <!-- TODO: Add visual styling and content -->
         <Constraint
-            android:visibility="gone"
+            android:alpha="0.0"
             android:id="@+id/zip"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -235,19 +237,21 @@
 
         <!-- TODO: Add visual styling and label -->
         <Constraint
-            android:visibility="gone"
+            android:alpha="0.0"
             android:id="@+id/button_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/buttonStyle"
-            android:layout_margin="@dimen/small_margin"
-            android:text="@string/find_my_representatives"
-            android:onClick="@{()->viewModel.callRepresentativesApi(address,item)}"
+            android:layout_marginStart="@dimen/small_margin"
+            android:layout_marginEnd="@dimen/small_margin"
+            android:layout_marginBottom="@dimen/small_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:text="@string/use_my_location"
             app:layout_constraintTop_toBottomOf="@id/zip" />
 
         <!-- TODO: Add visual styling and content -->
         <Constraint
-            android:visibility="gone"
+            android:alpha="0.0"
             android:id="@+id/button_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

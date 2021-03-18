@@ -20,6 +20,8 @@
         <androidx.constraintlayout.motion.widget.MotionLayout
             android:layout_height="match_parent"
             android:layout_width="match_parent"
+            android:isScrollContainer="true"
+            android:overScrollMode="always"
             app:layoutDescription="@xml/fragment_representative_scene">
 
             <!-- TODO: Add visual styling and content -->
@@ -27,8 +29,8 @@
                 android:id="@+id/search_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/representative_search"
                 android:padding="@dimen/default_padding"
+                android:text="@string/representative_search"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -107,12 +109,15 @@
             <!-- TODO: Add visual styling and label -->
             <Button
                 android:id="@+id/button_search"
+                style="@style/buttonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/buttonStyle"
-                android:layout_margin="@dimen/small_margin"
-                android:text="@string/find_my_representatives"
+                android:layout_marginStart="@dimen/small_margin"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginEnd="@dimen/small_margin"
                 android:onClick="@{()->viewModel.callRepresentativesApi(address,item)}"
+                android:text="@string/find_my_representatives"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/zip" />
 
             <!-- TODO: Add visual styling and content -->
@@ -145,7 +150,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/representativesRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
