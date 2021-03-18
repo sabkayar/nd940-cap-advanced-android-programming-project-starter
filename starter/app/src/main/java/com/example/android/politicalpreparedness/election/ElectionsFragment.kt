@@ -15,6 +15,7 @@ import com.example.android.politicalpreparedness.database.ElectionDatabase
 import com.example.android.politicalpreparedness.databinding.FragmentElectionBinding
 import com.example.android.politicalpreparedness.election.adapter.ElectionClickListener
 import com.example.android.politicalpreparedness.election.adapter.ElectionListAdapter
+import com.example.android.politicalpreparedness.setProgressBarToVisible
 import com.example.android.politicalpreparedness.showSnackBar
 
 class ElectionsFragment : Fragment() {
@@ -40,6 +41,7 @@ class ElectionsFragment : Fragment() {
         binding.electionViewModel = viewModel
         binding.lifecycleOwner = this
 
+        requireActivity().setProgressBarToVisible(true)
         viewModel.populateElections()
 
         //TODO: Link elections to voter info
@@ -60,16 +62,17 @@ class ElectionsFragment : Fragment() {
         binding.upcomingElectionRecyclerView.adapter = electionListAdapter
         binding.savedElectionsRecyclerView.adapter = savedElectionListAdapter
 
-        navController=this.findNavController()
+        navController = this.findNavController()
 
         viewModel.upcomingElections.observe(viewLifecycleOwner, Observer {
+            requireActivity().setProgressBarToVisible(false)
             electionListAdapter.submitList(it)
         })
 
         viewModel.savedElections.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 savedElectionListAdapter.submitList(it)
-            }else{
+            } else {
                 savedElectionListAdapter.submitList(mutableListOf())
             }
         })
@@ -83,6 +86,7 @@ class ElectionsFragment : Fragment() {
 
         viewModel.showPrompt.observe(viewLifecycleOwner, Observer {
             requireActivity().showSnackBar(it, binding.root)
+            requireActivity().setProgressBarToVisible(false)
         })
         return binding.root
 
