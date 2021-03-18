@@ -23,6 +23,7 @@ import com.example.android.politicalpreparedness.databinding.FragmentRepresentat
 import com.example.android.politicalpreparedness.loadUrl
 import com.example.android.politicalpreparedness.network.models.Address
 import com.example.android.politicalpreparedness.representative.model.Item
+import com.example.android.politicalpreparedness.setProgressBarToVisible
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import com.google.android.gms.tasks.Task
@@ -82,6 +83,7 @@ class RepresentativeFragment : Fragment() {
                 binding.item = item
                 viewModel.callRepresentativesApi(address, binding.item)
             }
+            requireActivity().setProgressBarToVisible(false)
         })
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
@@ -121,6 +123,8 @@ class RepresentativeFragment : Fragment() {
 
     @SuppressLint("MissingPermission")
     private fun requestLocation() {
+
+        requireActivity().setProgressBarToVisible(true)
 
         val builder = LocationSettingsRequest.Builder()
                 .addLocationRequest(locationRequest)

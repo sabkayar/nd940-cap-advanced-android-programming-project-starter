@@ -3,6 +3,7 @@
     <dimen name="default_padding">8dp</dimen>
     <dimen name="normal_margin">16dp</dimen>
     <dimen name="small_margin">8dp</dimen>
+    <dimen name="progress_bar_size">208dp</dimen>
 
     <!-- TODO: Add necessary dimension values -->s
 

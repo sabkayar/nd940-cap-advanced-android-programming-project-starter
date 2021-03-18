@@ -12,6 +12,7 @@ import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.database.ElectionDatabase
 import com.example.android.politicalpreparedness.databinding.FragmentVoterInfoBinding
 import com.example.android.politicalpreparedness.loadUrl
+import com.example.android.politicalpreparedness.setProgressBarToVisible
 import com.example.android.politicalpreparedness.showSnackBar
 
 class VoterInfoFragment : Fragment() {
@@ -35,10 +36,12 @@ class VoterInfoFragment : Fragment() {
         binding.lifecycleOwner = this
 
         val args = VoterInfoFragmentArgs.fromBundle(arguments!!)
+        requireActivity().setProgressBarToVisible(true)
         viewModel.populateVoterInfo(args.argElectionId, args.argDivision)
 
         viewModel.voterInfo.observe(viewLifecycleOwner, Observer {
             binding.voterInfo = it
+            requireActivity().setProgressBarToVisible(false)
         })
 
         viewModel.loadUrlIntent.observe(viewLifecycleOwner, Observer {
@@ -51,6 +54,7 @@ class VoterInfoFragment : Fragment() {
         viewModel.showPrompt.observe(viewLifecycleOwner, Observer {
             requireActivity().showSnackBar(it, binding.root)
             findNavController().popBackStack()
+            requireActivity().setProgressBarToVisible(false)
         })
 
         //TODO: Populate voter info -- hide views without provided data.
