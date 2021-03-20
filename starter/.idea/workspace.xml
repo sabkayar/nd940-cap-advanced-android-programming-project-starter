@@ -40,30 +40,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1bad951b-c862-4bfc-af72-c59c9c585933" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/jarAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/politicalpreparedness/Extensions.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/politicalpreparedness/Extensions.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/politicalpreparedness/election/ElectionsFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/politicalpreparedness/election/ElectionsFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/politicalpreparedness/election/VoterInfoFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/politicalpreparedness/election/VoterInfoFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/politicalpreparedness/representative/RepresentativeFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/politicalpreparedness/representative/RepresentativeFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -110,9 +97,13 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHOW_ALL_PROCESSES" value="false" />
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/src/main/java/com/example/android/politicalpreparedness/network/models" />
     </key>
@@ -242,38 +233,22 @@
     <state x="489" y="169" key="AndroidProcessChooserDialog/0.25.1440.790@0.25.1440.790" timestamp="1615874169580" />
     <state x="489" y="169" key="AndroidProcessChooserDialog/0.25.1440.791@0.25.1440.791" timestamp="1615537471203" />
     <state x="489" y="170" key="AndroidProcessChooserDialog/0.25.1440.794@0.25.1440.794" timestamp="1615505705978" />
-    <state x="0" y="25" key="CommitChangelistDialog2" timestamp="1615880856649">
+    <state x="0" y="25" key="CommitChangelistDialog2" timestamp="1616053792832">
       <screen x="0" y="25" width="1440" height="790" />
     </state>
-    <state x="0" y="25" key="CommitChangelistDialog2/0.25.1440.790@0.25.1440.790" timestamp="1615880856649" />
+    <state x="0" y="25" key="CommitChangelistDialog2/0.25.1440.790@0.25.1440.790" timestamp="1616053792832" />
     <state x="0" y="25" key="CommitChangelistDialog2/0.25.1440.791@0.25.1440.791" timestamp="1615538374107" />
-    <state x="100" y="125" width="1240" height="590" key="DiffContextDialog" timestamp="1616026751739">
+    <state x="100" y="125" width="1240" height="590" key="DiffContextDialog" timestamp="1616053790878">
       <screen x="0" y="25" width="1440" height="790" />
     </state>
-    <state x="100" y="125" width="1240" height="590" key="DiffContextDialog/0.25.1440.790@0.25.1440.790" timestamp="1616026751739" />
+    <state x="100" y="125" width="1240" height="590" key="DiffContextDialog/0.25.1440.790@0.25.1440.790" timestamp="1616053790878" />
     <state x="100" y="125" width="1240" height="591" key="DiffContextDialog/0.25.1440.791@0.25.1440.791" timestamp="1615538373094" />
-    <state width="1398" height="-40" key="GridCell.Tab.0.bottom" timestamp="1616026278871">
-      <screen x="0" y="25" width="1440" height="790" />
-    </state>
-    <state width="1398" height="-40" key="GridCell.Tab.0.bottom/0.25.1440.790@0.25.1440.790" timestamp="1616026278871" />
     <state width="1398" height="245" key="GridCell.Tab.0.bottom/0.25.1440.791@0.25.1440.791" timestamp="1615592548545" />
     <state width="1398" height="207" key="GridCell.Tab.0.bottom/0.25.1440.794@0.25.1440.794" timestamp="1615508307218" />
-    <state width="1398" height="-40" key="GridCell.Tab.0.center" timestamp="1616026278870">
-      <screen x="0" y="25" width="1440" height="790" />
-    </state>
-    <state width="1398" height="-40" key="GridCell.Tab.0.center/0.25.1440.790@0.25.1440.790" timestamp="1616026278870" />
     <state width="1398" height="245" key="GridCell.Tab.0.center/0.25.1440.791@0.25.1440.791" timestamp="1615592548544" />
     <state width="1398" height="207" key="GridCell.Tab.0.center/0.25.1440.794@0.25.1440.794" timestamp="1615508307217" />
-    <state width="1398" height="-40" key="GridCell.Tab.0.left" timestamp="1616026278870">
-      <screen x="0" y="25" width="1440" height="790" />
-    </state>
-    <state width="1398" height="-40" key="GridCell.Tab.0.left/0.25.1440.790@0.25.1440.790" timestamp="1616026278870" />
     <state width="1398" height="245" key="GridCell.Tab.0.left/0.25.1440.791@0.25.1440.791" timestamp="1615592548542" />
     <state width="1398" height="207" key="GridCell.Tab.0.left/0.25.1440.794@0.25.1440.794" timestamp="1615508307217" />
-    <state width="1398" height="-40" key="GridCell.Tab.0.right" timestamp="1616026278871">
-      <screen x="0" y="25" width="1440" height="790" />
-    </state>
-    <state width="1398" height="-40" key="GridCell.Tab.0.right/0.25.1440.790@0.25.1440.790" timestamp="1616026278871" />
     <state width="1398" height="245" key="GridCell.Tab.0.right/0.25.1440.791@0.25.1440.791" timestamp="1615592548545" />
     <state width="1398" height="207" key="GridCell.Tab.0.right/0.25.1440.794@0.25.1440.794" timestamp="1615508307218" />
     <state width="1398" height="376" key="GridCell.Tab.1.bottom" timestamp="1615878671330">
